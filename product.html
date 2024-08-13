@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Pintrestly</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <div class="logo">
+                <img src="file:///C:/Users/anish/OneDrive/Desktop/sport/images/logo1.jpg" width="200px">
+                </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="product.html">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Cart</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row" id="products">
+            <!-- Product cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const products = [
+    { id: 1, name: " BULLAR Home Gym Set, Home Gym Combo", price: "$20.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/c_undershirt.png' },
+    { id: 2, name: "Skipping Ropes", price: "1024.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/c_polo-shirt.png'},
+    { id: 3, name: "Mapache Gym Equipment", price: "200.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/c_shirt-girl.png' },
+    { id: 4, name: "Smith Machine", price: "999.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/c_western-shirt.png' },
+    { id: 5, name: "Boxing Gloves", price: "12000.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/jewellery3.jpg'},
+    { id: 6, name: "Exercise Mats", price: "951.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/dress4.jpeg' },
+    { id: 7, name: "Dumbbells and Barbells", price: "1499.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/shoes5.jpg' },
+    { id: 8, name: "Punching Bags", price: "749.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/dress2.jpg' },
+    { id: 9, name: "Medicine Balls", price: "1500.00", image: 'file:///C:/Users/anish/OneDrive/Desktop/sport/images/shoes4.jpg' }
+        ];
+    
+        function renderProducts() {
+            const productContainer = document.getElementById('products');
+            products.forEach(product => {
+                const productCard = `
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.price}</p>
+                                <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productContainer.innerHTML += productCard;
+            });
+        }
+    
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${product.name} has been added to your cart!`);
+        }
+    
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+    </body>
+    </html>
+
